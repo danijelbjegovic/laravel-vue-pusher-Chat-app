@@ -24,8 +24,9 @@ class ChatEvent implements ShouldBroadcast
      */
     public function __construct($message, User $user)
     {
-        return $this->message = message;
-        return $this->user = $user;
+        $this->message = $message;
+        $this->user = $user->name;
+        $this->dontBroadcastToCurrentUser();
     }
 
     /**
@@ -35,6 +36,6 @@ class ChatEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('chat');
+        return new PrivateChannel('chat');
     }
 }
