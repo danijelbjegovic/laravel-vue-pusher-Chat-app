@@ -23,9 +23,6 @@
             badgeClass(){
                 return 'badge-'+this.color
             }
-        },
-        mounted() {
-            console.log('Component mounted.')
         }
     }
 </script>

@@ -24890,7 +24890,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             color: [],
             time: []
         },
-        typing: ''
+        typing: '',
+        numberOfUsers: 0
 
     },
     watch: {
@@ -24940,6 +24941,14 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             } else {
                 _this2.typing = '';
             }
+        });
+
+        Echo.join('chat').here(function (users) {
+            _this2.numberOfUsers = users.length;
+        }).joining(function (user) {
+            _this2.numberOfUsers++;
+        }).leaving(function (user) {
+            _this2.numberOfUsers--;
         });
     }
 });
@@ -57288,9 +57297,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         badgeClass: function badgeClass() {
             return 'badge-' + this.color;
         }
-    },
-    mounted: function mounted() {
-        console.log('Component mounted.');
     }
 });
 

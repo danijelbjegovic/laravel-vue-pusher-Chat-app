@@ -30,7 +30,8 @@ const app = new Vue({
             color:[],
             time:[]
         },
-        typing:''
+        typing:'',
+        numberOfUsers:0
 
     },
     watch:{
@@ -87,6 +88,17 @@ const app = new Vue({
                 this.typing = ''
             }
             
+        })
+
+        Echo.join('chat')
+        .here((users)=>{
+            this.numberOfUsers = users.length
+        })
+        .joining((user) => {
+            this.numberOfUsers++
+        })
+        .leaving((user) => {
+            this.numberOfUsers--
         })
     
     }
