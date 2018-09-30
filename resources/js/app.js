@@ -8,10 +8,19 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-// ES6
+
+// for autoscroll 
 import Vue from 'vue'
 import VueChatScroll from 'vue-chat-scroll'
+
 Vue.use(VueChatScroll)
+
+//for notifications
+import Toaster from 'v-toaster'
+import 'v-toaster/dist/v-toaster.css'
+
+Vue.use(Toaster, {timeout: 5000})
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -96,9 +105,12 @@ const app = new Vue({
         })
         .joining((user) => {
             this.numberOfUsers++
+            this.$toaster.success(user.name+' joined')
+
         })
         .leaving((user) => {
             this.numberOfUsers--
+            this.$toaster.warning(user.name+' left')
         })
     
     }
