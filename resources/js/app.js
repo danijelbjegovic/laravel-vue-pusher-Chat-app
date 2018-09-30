@@ -62,7 +62,8 @@ const app = new Vue({
                 this.chat.time.push(this.getTime())
 
                 axios.post('/send', {
-                    message : this.message
+                    message : this.message,
+                    chat: this.chat
                 })
                 .then(response =>{
                     console.log(response)
@@ -78,16 +79,43 @@ const app = new Vue({
         getTime(){
             let time = new Date()
             return time.getHours()+":"+time.getMinutes()
+        },
+        getOldMessages(){
+            axios.post('/getOldMessage')
+                  .then(response => {
+                    console.log(response);
+                    if (response.data != '') {
+                        this.chat = response.data;
+                    }
+                  })
+                  .catch(error => {
+                    console.log(error);
+                  });
+        },
+        deleteSession(){
+            axios.post('/deleteSession')
+            .then(response=>this.$toaster.success('Chat History is deleted'))
         }
     },
     mounted(){
-    
+        this.getOldMessages()
+
         Echo.private('chat')
         .listen('ChatEvent', (e) => {
             this.chat.message.push(e.message)
             this.chat.user.push(e.user)
             this.chat.color.push('warning')
             this.chat.time.push(this.getTime())
+            axios.post('/saveToSession', {
+                chat : this.chat
+                
+            })
+            .then(response => {
+                console.log('saving to session')
+            })
+            .catch(error=>{
+                //console.log(error)
+            })
 
         })
         .listenForWhisper('typing', (e) => {
@@ -104,11 +132,13 @@ const app = new Vue({
             this.numberOfUsers = users.length
         })
         .joining((user) => {
+            console.log(user)
             this.numberOfUsers++
             this.$toaster.success(user.name+' joined')
 
         })
         .leaving((user) => {
+
             this.numberOfUsers--
             this.$toaster.warning(user.name+' left')
         })
