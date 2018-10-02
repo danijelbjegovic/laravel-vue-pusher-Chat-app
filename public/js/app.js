@@ -25034,11 +25034,12 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                 console.log(error);
             });
         },
-        deleteSession: function deleteSession() {
+        deleteSessions: function deleteSessions() {
             var _this3 = this;
 
             axios.post('/deleteSession').then(function (response) {
-                return _this3.$toaster.success('Chat History is deleted');
+                _this3.chat.message = [];
+                _this3.$toaster.success('Chat History is deleted');
             });
         }
     },

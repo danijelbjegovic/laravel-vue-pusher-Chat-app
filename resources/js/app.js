@@ -92,9 +92,13 @@ const app = new Vue({
                     console.log(error);
                   });
         },
-        deleteSession(){
+        deleteSessions(){
             axios.post('/deleteSession')
-            .then(response=>this.$toaster.success('Chat History is deleted'))
+            .then(response=>{
+                this.chat.message = []
+                this.$toaster.success('Chat History is deleted')
+                
+            })
         }
     },
     mounted(){
