@@ -18,7 +18,7 @@
         <div class="row" id="app">
             <div class="offset-4 col-4 offset-sm-1 col-sm-10">
                 <li class="list-group-item active">
-                    Chat room 
+                    Chat room by danny boy
                     <span class="badge badge-pill badge-success">@{{ numberOfUsers }}</span>
                     
                 </li>
