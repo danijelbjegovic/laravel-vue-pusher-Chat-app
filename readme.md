@@ -1,7 +1,7 @@
-laravel + vue + pusher - real time chat application
-# Real time chat with laravel
 
+# Real time chat 
 
+- laravel + vue + pusher 
 
 - After cloning run:
 - php artisan install, php artisan migrate
