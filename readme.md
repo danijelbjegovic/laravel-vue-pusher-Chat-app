@@ -9,3 +9,10 @@
 
 # Screenshots
 ![chat](https://user-images.githubusercontent.com/38542995/47264485-6da10280-d518-11e8-9d03-cc25b5d77f0b.gif)
+
+## Features
+
+- User count status
+- User joined/left notifications
+- Typing signal
+- Handling chat history - save to session/database
